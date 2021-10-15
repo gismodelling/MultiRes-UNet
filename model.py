@@ -182,7 +182,7 @@ def ResPath(filters, length, inp):
     return out
 
 
-def MultiResUnet(height, width, n_channels):
+def MultiRes-UNet(height, width, n_channels):
  
     inputs = Input((height, width, n_channels))
 
@@ -230,7 +230,7 @@ def MultiResUnet(height, width, n_channels):
 
 
 
-model = MultiResUnet(1536, 1536,3)
+model = MultiRes-UNet(1536, 1536,3)
 model.summary()
 
 model.compile(optimizer = Adam(lr = 1e-4), loss = 'binary_crossentropy', metrics = ['accuracy'])
