@@ -145,11 +145,11 @@ def MultiResBlock(U, inp, alpha = 1.67):
                         activation='relu', padding='same')
 
     out = concatenate([conv3x3, conv5x5, conv7x7], axis=3)
-    out = BatchNormalization(axis=3)(out)
+    out = Dropout(0.5)(out)
 
     out = add([shortcut, out])
     out = Activation('relu')(out)
-    out = BatchNormalization(axis=3)(out)
+    out = Dropout(0.5)(out)
 
     return out
 
