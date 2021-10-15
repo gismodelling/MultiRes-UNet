@@ -182,25 +182,25 @@ def ResPath(filters, length, inp):
     return out
 
 
-def MultiRes-UNet(height, width, n_channels):
+def MultiResUNet(height, width, n_channels):
  
     inputs = Input((height, width, n_channels))
 
     mresblock1 = MultiResBlock(32, inputs)
     pool1 = MaxPooling2D(pool_size=(2, 2))(mresblock1)
-    mresblock1 = ResPath(32, 4, mresblock1)
+    mresblock1 = ResPath(64, 4, mresblock1)
 
     mresblock2 = MultiResBlock(32*2, pool1)
     pool2 = MaxPooling2D(pool_size=(2, 2))(mresblock2)
-    mresblock2 = ResPath(32*2, 3, mresblock2)
+    mresblock2 = ResPath(64*2, 3, mresblock2)
 
     mresblock3 = MultiResBlock(32*4, pool2)
     pool3 = MaxPooling2D(pool_size=(2, 2))(mresblock3)
-    mresblock3 = ResPath(32*4, 2, mresblock3)
+    mresblock3 = ResPath(64*4, 2, mresblock3)
 
     mresblock4 = MultiResBlock(32*8, pool3)
     pool4 = MaxPooling2D(pool_size=(2, 2))(mresblock4)
-    mresblock4 = ResPath(32*8, 1, mresblock4)
+    mresblock4 = ResPath(64*8, 1, mresblock4)
 
     mresblock5 = MultiResBlock(32*16, pool4)
 
@@ -230,7 +230,7 @@ def MultiRes-UNet(height, width, n_channels):
 
 
 
-model = MultiRes-UNet(1536, 1536,3)
+model = MultiResUNet(1536, 1536,3)
 model.summary()
 
 model.compile(optimizer = Adam(lr = 1e-4), loss = 'binary_crossentropy', metrics = ['accuracy'])
